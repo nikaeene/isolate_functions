@@ -37,7 +37,7 @@ class _MyAppState extends State<MyApp> {
       value =
           await _isolateFunctionsPlugin.isolate(Calculator().addOne, paramsMapIn:{'int':1}) ?? 'Unknown platform version';
     } on PlatformException {
-      String error = 'Failed to get platform version.';
+      throw 'Failed to get platform version.';
     }
 
     // If the widget was removed from the tree while the calculation was in
@@ -71,9 +71,7 @@ class Calculator {
   /// Returns [value] plus 1.
   int addOne(Map? paramsMapIn) {
     /// Heavy lifting.
-    var total = 0;
     for(var i = 0; i < 1000000000; i++) {
-      total += i;
     }
     return paramsMapIn!['int'] + 1;
   }

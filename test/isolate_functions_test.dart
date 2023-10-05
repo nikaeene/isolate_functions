@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:isolate_functions/isolate_functions.dart';
 
@@ -18,11 +20,10 @@ class Calculator {
   /// Returns [value] plus 1.
   int addOne(Map? paramsMapIn) {
     /// Heavy lifting.
-    var total = 0;
+
     for(var i = 0; i < 1000000000; i++) {
-      total += i;
+      Timer(const Duration(milliseconds: 20), () { });
     }
-    print('Total: $total');
     return paramsMapIn!['int'] + 1;
   }
 }

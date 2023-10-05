@@ -1,6 +1,5 @@
 
 import 'dart:isolate';
-import 'dart:ui';
 
 import 'package:flutter/services.dart';
 
@@ -14,7 +13,7 @@ class IsolateFunctions {
       _getResponse,
       _DataModel(
         isolateRootToken: isolateRootToken,
-        function: () async => await functionIn(paramsMapIn),
+        function: (value) async => await value != null?functionIn(value):functionIn(),
         paramsMap: paramsMapIn,
         answerPort: rp.sendPort,
       ),
@@ -35,7 +34,7 @@ class IsolateFunctions {
   ///Get the response from the isolate.
   void _getResponse(_DataModel data) async {
     BackgroundIsolateBinaryMessenger.ensureInitialized(data.isolateRootToken);
-    final answer = await data.function();
+    final answer = await data.function(data.paramsMap);
     data.answerPort.send(answer);
   }
 }
