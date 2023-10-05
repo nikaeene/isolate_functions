@@ -1,19 +1,18 @@
-
 import 'dart:isolate';
 
 import 'package:flutter/services.dart';
 
-
 class IsolateFunctions {
   /// Get the function and parameters as a Map from the calling isolate and return the result.
-  Future<dynamic> isolate(Function functionIn, { Map? paramsMapIn}) async {
+  Future<dynamic> isolate(Function functionIn, {Map? paramsMapIn}) async {
     final rp = ReceivePort();
     final isolateRootToken = RootIsolateToken.instance!;
     await Isolate.spawn<_DataModel>(
       _getResponse,
       _DataModel(
         isolateRootToken: isolateRootToken,
-        function: (value) async => await value != null?functionIn(value):functionIn(),
+        function: (value) async =>
+            await value != null ? functionIn(value) : functionIn(),
         paramsMap: paramsMapIn,
         answerPort: rp.sendPort,
       ),
@@ -53,4 +52,3 @@ class _DataModel {
     this.paramsMap,
   });
 }
-

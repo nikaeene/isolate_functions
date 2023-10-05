@@ -34,8 +34,9 @@ class _MyAppState extends State<MyApp> {
     // We also handle the message potentially returning null.
     //the input is 1 and you should expect 2.
     try {
-      value =
-          await _isolateFunctionsPlugin.isolate(Calculator().addOne, paramsMapIn:{'int':1}) ?? 'Unknown platform version';
+      value = await _isolateFunctionsPlugin
+              .isolate(Calculator().addOne, paramsMapIn: {'int': 1}) ??
+          'Unknown platform version';
     } on PlatformException {
       throw 'Failed to get platform version.';
     }
@@ -65,14 +66,12 @@ class _MyAppState extends State<MyApp> {
   }
 }
 
-
 /// A Calculator.
 class Calculator {
   /// Returns [value] plus 1.
   int addOne(Map? paramsMapIn) {
     /// Heavy lifting.
-    for(var i = 0; i < 1000000000; i++) {
-    }
+    for (var i = 0; i < 1000000000; i++) {}
     return paramsMapIn!['int'] + 1;
   }
 }

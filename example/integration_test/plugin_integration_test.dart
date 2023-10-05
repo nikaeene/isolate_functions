@@ -6,7 +6,6 @@
 // For more information about Flutter integration tests, please see
 // https://docs.flutter.dev/cookbook/testing/integration/introduction
 
-
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 
@@ -18,7 +17,8 @@ void main() {
 
   testWidgets('getPlatformVersion test', (WidgetTester tester) async {
     final IsolateFunctions plugin = IsolateFunctions();
-    final String? version = await plugin.isolate(Calculator().addOne,  paramsMapIn:{'int':0});
+    final String? version =
+        await plugin.isolate(Calculator().addOne, paramsMapIn: {'int': 0});
     // The version string depends on the host platform running the test, so
     // just assert that some non-empty string is returned.
     expect(version?.isNotEmpty, true);
