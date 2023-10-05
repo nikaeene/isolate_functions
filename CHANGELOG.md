@@ -9,3 +9,7 @@
 ## 1.0.3
 
 * A minor change in the description file and bug fixes
+
+## 1.0.4
+
+* Dart format.

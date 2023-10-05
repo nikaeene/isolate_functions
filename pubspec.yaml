@@ -1,6 +1,6 @@
 name: isolate_functions
 description: A Flutter plugin to run functions in a separate isolate. this plugin simplifies the process of running functions in a separate isolate and getting the result back.
-version: 1.0.3
+version: 1.0.4
 repository: https://github.com/nikaeene/isolate_functions
 
 environment:
