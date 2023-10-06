@@ -15,12 +15,12 @@ import 'package:isolate_functions_example/main.dart';
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
-  testWidgets('getPlatformVersion test', (WidgetTester tester) async {
+  testWidgets('getCalculation test', (WidgetTester tester) async {
     final IsolateFunctions plugin = IsolateFunctions();
-    final String? version =
-        await plugin.isolate(Calculator().addOne, paramsMapIn: {'int': 0});
+    final int? calculation =
+        await plugin.isolate(Calculator().addOne, paramsIn: 0);
     // The version string depends on the host platform running the test, so
     // just assert that some non-empty string is returned.
-    expect(version?.isNotEmpty, true);
+    expect(calculation != null, true);
   });
 }

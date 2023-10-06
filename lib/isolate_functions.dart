@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 
 class IsolateFunctions {
   /// Get the function and parameters as a Map from the calling isolate and return the result.
-  Future<dynamic> isolate(Function functionIn, {Map? paramsMapIn}) async {
+  Future<dynamic> isolate(Function functionIn, {dynamic paramsIn}) async {
     final rp = ReceivePort();
     final isolateRootToken = RootIsolateToken.instance!;
     await Isolate.spawn<_DataModel>(
@@ -13,7 +13,7 @@ class IsolateFunctions {
         isolateRootToken: isolateRootToken,
         function: (value) async =>
             await value != null ? functionIn(value) : functionIn(),
-        paramsMap: paramsMapIn,
+        params: paramsIn,
         answerPort: rp.sendPort,
       ),
     );
@@ -33,7 +33,7 @@ class IsolateFunctions {
   ///Get the response from the isolate.
   void _getResponse(_DataModel data) async {
     BackgroundIsolateBinaryMessenger.ensureInitialized(data.isolateRootToken);
-    final answer = await data.function(data.paramsMap);
+    final answer = await data.function(data.params);
     data.answerPort.send(answer);
   }
 }
@@ -42,13 +42,13 @@ class IsolateFunctions {
 class _DataModel {
   final RootIsolateToken isolateRootToken;
   final Function function;
-  final Map? paramsMap;
+  final dynamic params;
   final SendPort answerPort;
 
   _DataModel({
     required this.isolateRootToken,
     required this.function,
     required this.answerPort,
-    this.paramsMap,
+    this.params,
   });
 }

@@ -12,4 +12,4 @@
 
 ## 1.0.4
 
-* Dart format.
+* Change input parameter from Map to dynamic.
